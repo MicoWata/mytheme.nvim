@@ -1,91 +1,76 @@
--- lua/mytheme/colors.lua
+-- lua/mytheme/init.lua
 local M = {}
 
--- Palette
-local colors = {
-	-- Base colors
-	sumiInk0 = "#16161D", -- Darkest background
-	sumiInk1 = "#1F1F28", -- Dark background
-	sumiInk2 = "#2A2A37", -- Default background
-	sumiInk3 = "#363646", -- Lighter background
-	sumiInk4 = "#54546D", -- Darker foreground
+function M.load()
+	-- Clear highlights
+	vim.cmd("highlight clear")
+	if vim.fn.exists("syntax_on") then
+		vim.cmd("syntax reset")
+	end
 
-	-- Popup and Floats
-	waveBlue1 = "#223249", -- Dark blue background
-	waveBlue2 = "#2D4F67", -- Lighter blue background
+	vim.o.termguicolors = true
+	vim.g.colors_name = "mytheme"
 
-	-- Foreground and Comments
-	oldWhite = "#C8C093", -- Default foreground
-	fujiWhite = "#DCD7BA", -- Light foreground
-	fujiGray = "#727169", -- Dark foreground
-	springViolet1 = "#938AA9", -- Comments
+	-- Exact Kanagawa colors from original theme
+	local colors = {
+		-- Primary Background and Foreground
+		sumiInk0 = "#16161D", -- darker background
+		sumiInk1 = "#1F1F28", -- default background
+		sumiInk2 = "#2A2A37", -- lighter background
+		sumiInk3 = "#363646", -- lightest background
+		fujiWhite = "#DCD7BA", -- default foreground
+		oldWhite = "#C8C093", -- darker foreground
 
-	-- Strings and Keywords
-	oniViolet = "#957FB8", -- Violet for keywords
-	crystalBlue = "#7E9CD8", -- Blue for functions
-	springGreen = "#98BB6C", -- Green for strings
-	boatYellow1 = "#938056", -- Dark yellow
-	boatYellow2 = "#C0A36E", -- Light yellow
-	carpYellow = "#E6C384", -- Bright yellow
+		-- Syntax Colors
+		springViolet1 = "#938AA9", -- comments
+		crystalBlue = "#7E9CD8", -- functions, keywords
+		springGreen = "#98BB6C", -- strings
+		sakuraPink = "#D27E99", -- special characters
+		surimiOrange = "#FFA066", -- constants
+		carpYellow = "#E6C384", -- operators
+		waveAqua1 = "#6A9589", -- types
+	}
 
-	-- Variables and Constants
-	sakuraPink = "#D27E99", -- Pink for variables
-	waveAqua1 = "#6A9589", -- Dark aqua
-	waveAqua2 = "#7AA89F", -- Light aqua
+	-- Define highlight groups using exact colors
+	local highlights = {
+		-- Editor UI
+		Normal = { fg = colors.fujiWhite, bg = colors.sumiInk1 },
+		NormalFloat = { fg = colors.fujiWhite, bg = colors.sumiInk0 },
+		SignColumn = { bg = colors.sumiInk1 },
+		ColorColumn = { bg = colors.sumiInk2 },
+		CursorLine = { bg = colors.sumiInk2 },
+		CursorLineNr = { fg = colors.carpYellow, bold = true },
+		LineNr = { fg = colors.springViolet1 },
 
-	-- Warnings and Errors
-	samuraiRed = "#E82424", -- Error red
-	peachRed = "#FF5D62", -- Lighter red
-	surimiOrange = "#FFA066", -- Warning orange
+		-- Syntax highlighting
+		Comment = { fg = colors.springViolet1, italic = true },
+		String = { fg = colors.springGreen },
+		Number = { fg = colors.sakuraPink },
+		Identifier = { fg = colors.fujiWhite },
+		Function = { fg = colors.crystalBlue },
+		Statement = { fg = colors.crystalBlue },
+		Keyword = { fg = colors.crystalBlue },
+		Constant = { fg = colors.surimiOrange },
+		Type = { fg = colors.sakuraPink },
+		Special = { fg = colors.sakuraPink },
 
-	-- Git colors
-	autumnGreen = "#76946A", -- Git Add
-	autumnRed = "#C34043", -- Git Delete
-	autumnYellow = "#DCA561", -- Git Change
-}
+		-- Menus and Windows
+		Pmenu = { fg = colors.fujiWhite, bg = colors.sumiInk0 },
+		PmenuSel = { fg = colors.fujiWhite, bg = colors.sumiInk2 },
 
--- Semantic color groups
-M.groups = {
-	bg = {
-		dark = colors.sumiInk0,
-		main = colors.sumiInk1,
-		light = colors.sumiInk2,
-		lighter = colors.sumiInk3,
-	},
-	fg = {
-		dark = colors.fujiGray,
-		main = colors.fujiWhite,
-		light = colors.oldWhite,
-	},
-	ui = {
-		float = colors.waveBlue1,
-		selection = colors.waveBlue2,
-		comment = colors.springViolet1,
-	},
-	syntax = {
-		func = colors.crystalBlue,
-		keyword = colors.oniViolet,
-		string = colors.springGreen,
-		variable = colors.sakuraPink,
-		constant = colors.carpYellow,
-		number = colors.sakuraPink,
-		type = colors.waveAqua2,
-		parameter = colors.boatYellow2,
-	},
-	diag = {
-		error = colors.samuraiRed,
-		warning = colors.surimiOrange,
-		info = colors.waveAqua2,
-		hint = colors.boatYellow1,
-	},
-	git = {
-		add = colors.autumnGreen,
-		change = colors.autumnYellow,
-		delete = colors.autumnRed,
-	},
-}
+		-- Search and Selection
+		Search = { fg = colors.sumiInk0, bg = colors.carpYellow },
+		Visual = { bg = colors.sumiInk3 },
+	}
 
--- Raw colors
-M.colors = colors
+	-- Apply all highlights
+	for group, settings in pairs(highlights) do
+		vim.api.nvim_set_hl(0, group, settings)
+	end
+end
+
+function M.setup()
+	M.load()
+end
 
 return M
