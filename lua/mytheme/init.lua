@@ -1,95 +1,155 @@
--- lua/mytheme/groups/syntax.lua
+-- lua/mytheme/init.lua
 local M = {}
 
-function M.get(c)
-	return {
-		-- Basic syntax
-		Comment = { fg = c.springViolet1, italic = true },
-		Constant = { fg = c.surimiOrange },
-		String = { fg = c.springGreen },
-		Character = { fg = c.springGreen },
-		Number = { fg = c.sakuraPink },
-		Boolean = { fg = c.surimiOrange },
-		Float = { fg = c.sakuraPink },
+function M.load()
+	vim.cmd("highlight clear")
+	if vim.fn.exists("syntax_on") then
+		vim.cmd("syntax reset")
+	end
 
-		Identifier = { fg = c.fujiWhite },
-		Function = { fg = c.crystalBlue },
+	vim.o.termguicolors = true
+	vim.g.colors_name = "mytheme"
 
-		Statement = { fg = c.oniViolet },
-		Conditional = { fg = c.oniViolet },
-		Repeat = { fg = c.oniViolet },
-		Label = { fg = c.oniViolet },
-		Operator = { fg = c.carpYellow },
-		Keyword = { fg = c.oniViolet },
-		Exception = { fg = c.oniViolet },
+	local colors = {
+		-- Dragon variant base colors (darker and warmer)
+		dragonBlack0 = "#0d0c0c",
+		dragonBlack1 = "#12120f",
+		dragonBlack2 = "#1D1C19",
+		dragonBlack3 = "#181616",
+		dragonBlack4 = "#282727",
+		dragonBlack5 = "#393836",
+		dragonBlack6 = "#625e5a",
 
-		PreProc = { fg = c.peachRed },
-		Include = { fg = c.peachRed },
-		Define = { fg = c.peachRed },
-		Macro = { fg = c.peachRed },
-		PreCondit = { fg = c.peachRed },
+		dragonWhite = "#c5c9c5", -- foreground
+		oldWhite = "#c8c093", -- warmer white
 
-		Type = { fg = c.waveAqua1 },
-		StorageClass = { fg = c.oniViolet },
-		Structure = { fg = c.oniViolet },
-		Typedef = { fg = c.waveAqua1 },
+		-- Syntax colors (dragon palette)
+		dragonGray = "#a6a69c", -- comments
+		dragonBlue = "#7e9cd8", -- functions
+		dragonViolet = "#957fb8", -- keywords
+		dragonGreen = "#87a987", -- strings
+		dragonYellow = "#c4b28a", -- operators
+		dragonOrange = "#ffa066", -- constants
+		dragonRed = "#e46876", -- special
+		dragonPink = "#d27e99", -- numbers
+		dragonAqua = "#7AA89F", -- types
 
-		Special = { fg = c.peachRed },
-		SpecialChar = { fg = c.peachRed },
-		Tag = { fg = c.peachRed },
-		Delimiter = { fg = c.fujiWhite },
-		SpecialComment = { fg = c.springViolet1, italic = true },
-		Debug = { fg = c.peachRed },
-
-		-- TreeSitter
-		["@variable"] = { fg = c.fujiWhite },
-		["@parameter"] = { fg = c.boatYellow2 },
-		["@function"] = { fg = c.crystalBlue },
-		["@function.builtin"] = { fg = c.crystalBlue },
-		["@keyword"] = { fg = c.oniViolet },
-		["@keyword.function"] = { fg = c.oniViolet },
-		["@keyword.operator"] = { fg = c.oniViolet },
-		["@method"] = { fg = c.crystalBlue },
-		["@property"] = { fg = c.carpYellow },
-		["@field"] = { fg = c.carpYellow },
-		["@constructor"] = { fg = c.surimiOrange },
-		["@conditional"] = { fg = c.oniViolet },
-		["@repeat"] = { fg = c.oniViolet },
-		["@constant"] = { fg = c.surimiOrange },
-		["@constant.builtin"] = { fg = c.surimiOrange },
-
-		-- Java specific
-		["@keyword.java"] = { fg = c.oniViolet },
-		["@type.java"] = { fg = c.waveAqua1 },
-		["@property.java"] = { fg = c.carpYellow },
-		["@variable.java"] = { fg = c.fujiWhite },
-		["@parameter.java"] = { fg = c.boatYellow2 },
-		["@function.java"] = { fg = c.crystalBlue },
-		["@method.java"] = { fg = c.crystalBlue },
-		["@keyword.function.java"] = { fg = c.oniViolet },
-		["@constant.java"] = { fg = c.surimiOrange },
-		["@constructor.java"] = { fg = c.surimiOrange },
-		["@conditional.java"] = { fg = c.oniViolet },
-		["@exception.java"] = { fg = c.oniViolet },
-		["@include.java"] = { fg = c.oniViolet },
-		["@repeat.java"] = { fg = c.oniViolet },
-		["@storageclass.java"] = { fg = c.oniViolet },
-		["@type.qualifier.java"] = { fg = c.oniViolet },
-
-		-- LSP Semantic tokens
-		["@lsp.type.class.java"] = { fg = c.waveAqua1 },
-		["@lsp.type.enum.java"] = { fg = c.waveAqua1 },
-		["@lsp.type.interface.java"] = { fg = c.waveAqua1 },
-		["@lsp.type.keyword.java"] = { fg = c.oniViolet },
-		["@lsp.type.modifier.java"] = { fg = c.oniViolet },
-		["@lsp.type.variable.java"] = { fg = c.fujiWhite },
-		["@lsp.type.parameter.java"] = { fg = c.boatYellow2 },
-		["@lsp.type.function.java"] = { fg = c.crystalBlue },
-		["@lsp.type.method.java"] = { fg = c.crystalBlue },
-		["@lsp.typeParameter.java"] = { fg = c.waveAqua1 },
-		["@lsp.mod.readonly.java"] = { fg = c.surimiOrange },
-		["@lsp.mod.static.java"] = { fg = c.oniViolet },
+		-- Additional colors
+		roninYellow = "#ff9e3b", -- warnings
+		autumnGreen = "#76946a", -- git add
+		autumnRed = "#c34043", -- git delete
+		autumnYellow = "#dca561", -- git change
+		samuraiRed = "#E82424", -- errors
+		waveBlue1 = "#223249", -- darker blue
+		waveBlue2 = "#2D4F67", -- lighter blue
 	}
+
+	-- Define highlight groups
+	local highlights = {
+		-- Editor UI
+		Normal = { fg = colors.dragonWhite, bg = colors.dragonBlack3 },
+		NormalFloat = { fg = colors.dragonWhite, bg = colors.dragonBlack1 },
+		SignColumn = { bg = colors.dragonBlack3 },
+		ColorColumn = { bg = colors.dragonBlack4 },
+		CursorLine = { bg = colors.dragonBlack4 },
+		CursorLineNr = { fg = colors.dragonYellow, bold = true },
+		LineNr = { fg = colors.dragonBlack6 },
+
+		-- Basic syntax
+		Comment = { fg = colors.dragonGray, italic = true },
+		Constant = { fg = colors.dragonOrange },
+		String = { fg = colors.dragonGreen },
+		Character = { fg = colors.dragonGreen },
+		Number = { fg = colors.dragonPink },
+		Boolean = { fg = colors.dragonOrange },
+		Float = { fg = colors.dragonPink },
+
+		Identifier = { fg = colors.dragonWhite },
+		Function = { fg = colors.dragonBlue },
+
+		Statement = { fg = colors.dragonViolet },
+		Conditional = { fg = colors.dragonViolet },
+		Repeat = { fg = colors.dragonViolet },
+		Label = { fg = colors.dragonViolet },
+		Operator = { fg = colors.dragonYellow },
+		Keyword = { fg = colors.dragonViolet },
+		Exception = { fg = colors.dragonViolet },
+
+		PreProc = { fg = colors.dragonRed },
+		Include = { fg = colors.dragonRed },
+		Define = { fg = colors.dragonRed },
+		Macro = { fg = colors.dragonRed },
+		PreCondit = { fg = colors.dragonRed },
+
+		Type = { fg = colors.dragonAqua },
+		StorageClass = { fg = colors.dragonViolet },
+		Structure = { fg = colors.dragonViolet },
+		Typedef = { fg = colors.dragonAqua },
+
+		Special = { fg = colors.dragonRed },
+		SpecialChar = { fg = colors.dragonRed },
+		Tag = { fg = colors.dragonRed },
+		Delimiter = { fg = colors.dragonWhite },
+		SpecialComment = { fg = colors.dragonGray, italic = true },
+		Debug = { fg = colors.dragonRed },
+
+		-- Java specific highlighting
+		["@keyword.java"] = { fg = colors.dragonViolet },
+		["@type.java"] = { fg = colors.dragonAqua },
+		["@property.java"] = { fg = colors.dragonYellow },
+		["@variable.java"] = { fg = colors.dragonWhite },
+		["@parameter.java"] = { fg = colors.oldWhite },
+		["@function.java"] = { fg = colors.dragonBlue },
+		["@method.java"] = { fg = colors.dragonBlue },
+		["@keyword.function.java"] = { fg = colors.dragonViolet },
+		["@constant.java"] = { fg = colors.dragonOrange },
+		["@constructor.java"] = { fg = colors.dragonOrange },
+		["@conditional.java"] = { fg = colors.dragonViolet },
+		["@exception.java"] = { fg = colors.dragonViolet },
+		["@include.java"] = { fg = colors.dragonViolet },
+		["@repeat.java"] = { fg = colors.dragonViolet },
+		["@storageclass.java"] = { fg = colors.dragonViolet },
+		["@type.qualifier.java"] = { fg = colors.dragonViolet },
+
+		-- LSP Semantic tokens for Java
+		["@lsp.type.class.java"] = { fg = colors.dragonAqua },
+		["@lsp.type.enum.java"] = { fg = colors.dragonAqua },
+		["@lsp.type.interface.java"] = { fg = colors.dragonAqua },
+		["@lsp.type.keyword.java"] = { fg = colors.dragonViolet },
+		["@lsp.type.modifier.java"] = { fg = colors.dragonViolet },
+		["@lsp.type.variable.java"] = { fg = colors.dragonWhite },
+		["@lsp.type.parameter.java"] = { fg = colors.oldWhite },
+		["@lsp.type.function.java"] = { fg = colors.dragonBlue },
+		["@lsp.type.method.java"] = { fg = colors.dragonBlue },
+		["@lsp.typeParameter.java"] = { fg = colors.dragonAqua },
+		["@lsp.mod.readonly.java"] = { fg = colors.dragonOrange },
+		["@lsp.mod.static.java"] = { fg = colors.dragonViolet },
+
+		-- Menus and Windows
+		Pmenu = { fg = colors.dragonWhite, bg = colors.dragonBlack1 },
+		PmenuSel = { fg = colors.dragonWhite, bg = colors.dragonBlack4 },
+
+		-- Search and Selection
+		Search = { fg = colors.dragonBlack1, bg = colors.dragonYellow },
+		Visual = { bg = colors.dragonBlack5 },
+	}
+
+	-- Load plugin highlights
+	local plugin_highlights = require("mytheme.groups.plugins").get(colors)
+
+	-- Merge all highlights
+	for group, settings in pairs(plugin_highlights) do
+		highlights[group] = settings
+	end
+
+	-- Apply all highlights
+	for group, settings in pairs(highlights) do
+		vim.api.nvim_set_hl(0, group, settings)
+	end
+end
+
+function M.setup()
+	M.load()
 end
 
 return M

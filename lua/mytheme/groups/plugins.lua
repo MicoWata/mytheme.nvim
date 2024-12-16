@@ -1,62 +1,76 @@
 -- lua/mytheme/groups/plugins.lua
 local M = {}
 
-function M.get(c)
+function M.get(colors)
 	return {
 		-- Telescope
-		TelescopeNormal = { fg = c.fujiWhite, bg = c.sumiInk0 },
-		TelescopeBorder = { fg = c.sumiInk3, bg = c.sumiInk0 },
-		TelescopePromptNormal = { fg = c.fujiWhite, bg = c.sumiInk0 },
-		TelescopePromptBorder = { fg = c.sumiInk3, bg = c.sumiInk0 },
-		TelescopePromptPrefix = { fg = c.crystalBlue, bg = c.sumiInk0 },
-		TelescopeResultsNormal = { fg = c.fujiWhite, bg = c.sumiInk0 },
-		TelescopeSelection = { fg = c.fujiWhite, bg = c.sumiInk2 },
-		TelescopeSelectionCaret = { fg = c.carpYellow, bg = c.sumiInk2 },
+		TelescopeNormal = { fg = colors.dragonWhite, bg = colors.dragonBlack1 },
+		TelescopeBorder = { fg = colors.dragonBlack5, bg = colors.dragonBlack1 },
+		TelescopeSelection = { fg = colors.dragonWhite, bg = colors.dragonBlack4 },
+		TelescopeSelectionCaret = { fg = colors.dragonYellow, bg = colors.dragonBlack4 },
+		TelescopeMultiSelection = { fg = colors.dragonGray },
+		TelescopeMatching = { fg = colors.dragonYellow, bold = true },
+		TelescopePromptNormal = { fg = colors.dragonWhite, bg = colors.dragonBlack1 },
+		TelescopePromptPrefix = { fg = colors.dragonViolet },
+		TelescopeResultsDiffAdd = { fg = colors.autumnGreen },
+		TelescopeResultsDiffChange = { fg = colors.autumnYellow },
+		TelescopeResultsDiffDelete = { fg = colors.autumnRed },
 
 		-- Neo-tree
-		NeoTreeNormal = { fg = c.fujiWhite, bg = c.sumiInk0 },
-		NeoTreeNormalNC = { fg = c.fujiWhite, bg = c.sumiInk0 },
-		NeoTreeVertSplit = { fg = c.sumiInk3, bg = c.sumiInk0 },
-		NeoTreeWinSeparator = { fg = c.sumiInk3, bg = c.sumiInk0 },
-		NeoTreeEndOfBuffer = { fg = c.sumiInk0, bg = c.sumiInk0 },
-		NeoTreeRootName = { fg = c.carpYellow, bold = true },
-		NeoTreeGitModified = { fg = c.carpYellow },
-		NeoTreeGitAdded = { fg = c.springGreen },
-		NeoTreeGitDeleted = { fg = c.peachRed },
-		NeoTreeGitConflict = { fg = c.surimiOrange },
-		NeoTreeGitUntracked = { fg = c.waveAqua1 },
-		NeoTreeIndentMarker = { fg = c.sumiInk3 },
-		NeoTreeDirectoryName = { fg = c.crystalBlue },
-		NeoTreeDirectoryIcon = { fg = c.crystalBlue },
-		NeoTreeDimText = { fg = c.sumiInk3 },
+		NeoTreeNormal = { fg = colors.dragonWhite, bg = colors.dragonBlack1 },
+		NeoTreeNormalNC = { fg = colors.dragonWhite, bg = colors.dragonBlack1 },
+		NeoTreeVertSplit = { fg = colors.dragonBlack5, bg = colors.dragonBlack1 },
+		NeoTreeWinSeparator = { fg = colors.dragonBlack5, bg = colors.dragonBlack1 },
+		NeoTreeEndOfBuffer = { fg = colors.dragonBlack1, bg = colors.dragonBlack1 },
+		NeoTreeRootName = { fg = colors.dragonYellow, bold = true },
+		NeoTreeGitAdded = { fg = colors.autumnGreen },
+		NeoTreeGitModified = { fg = colors.autumnYellow },
+		NeoTreeGitDeleted = { fg = colors.autumnRed },
+		NeoTreeGitStaged = { fg = colors.autumnGreen },
+		NeoTreeGitConflict = { fg = colors.autumnRed, italic = true },
+		NeoTreeGitUntracked = { fg = colors.dragonYellow },
+		NeoTreeIndentMarker = { fg = colors.dragonBlack5 },
+		NeoTreeSymbolicLinkTarget = { fg = colors.dragonGray },
 
 		-- Gitsigns
-		GitSignsAdd = { fg = c.springGreen },
-		GitSignsChange = { fg = c.carpYellow },
-		GitSignsDelete = { fg = c.peachRed },
-		GitSignsCurrentLineBlame = { fg = c.springViolet1 },
+		GitSignsAdd = { fg = colors.autumnGreen },
+		GitSignsChange = { fg = colors.autumnYellow },
+		GitSignsDelete = { fg = colors.autumnRed },
+		GitSignsCurrentLineBlame = { fg = colors.dragonGray },
 
-		-- Which-key
-		WhichKey = { fg = c.crystalBlue },
-		WhichKeyGroup = { fg = c.oniViolet },
-		WhichKeyDesc = { fg = c.fujiWhite },
-		WhichKeyFloat = { bg = c.sumiInk0 },
-		WhichKeyBorder = { fg = c.sumiInk3, bg = c.sumiInk0 },
+		-- Lazy
+		LazyNormal = { fg = colors.dragonWhite, bg = colors.dragonBlack1 },
+		LazyButtonActive = { fg = colors.dragonWhite, bg = colors.dragonBlack4, bold = true },
+		LazyButtonHover = { fg = colors.dragonWhite, bg = colors.dragonBlack5 },
+		LazyH1 = { fg = colors.dragonYellow, bg = colors.dragonBlack3, bold = true },
+
+		-- WhichKey
+		WhichKey = { fg = colors.dragonBlue },
+		WhichKeyGroup = { fg = colors.dragonViolet },
+		WhichKeyDesc = { fg = colors.dragonYellow },
+		WhichKeyFloat = { bg = colors.dragonBlack1 },
+		WhichKeyBorder = { fg = colors.dragonBlack5, bg = colors.dragonBlack1 },
 
 		-- Indent Blankline
-		IndentBlanklineChar = { fg = c.sumiInk3 },
-		IndentBlanklineContextChar = { fg = c.oniViolet },
+		IndentBlanklineChar = { fg = colors.dragonBlack5 },
+		IndentBlanklineContextChar = { fg = colors.dragonViolet },
 
-		-- Nvim-Cmp
-		CmpItemAbbr = { fg = c.fujiWhite },
-		CmpItemAbbrMatch = { fg = c.crystalBlue, bold = true },
-		CmpItemAbbrMatchFuzzy = { fg = c.crystalBlue },
-		CmpItemKind = { fg = c.oniViolet },
-		CmpItemMenu = { fg = c.springViolet1 },
-
-		-- Treesitter Context
-		TreesitterContext = { bg = c.sumiInk2 },
-		TreesitterContextLineNumber = { fg = c.springViolet1 },
+		-- Notify
+		NotifyERRORBorder = { fg = colors.samuraiRed },
+		NotifyWARNBorder = { fg = colors.roninYellow },
+		NotifyINFOBorder = { fg = colors.autumnGreen },
+		NotifyDEBUGBorder = { fg = colors.dragonGray },
+		NotifyTRACEBorder = { fg = colors.dragonAqua },
+		NotifyERRORIcon = { fg = colors.samuraiRed },
+		NotifyWARNIcon = { fg = colors.roninYellow },
+		NotifyINFOIcon = { fg = colors.autumnGreen },
+		NotifyDEBUGIcon = { fg = colors.dragonGray },
+		NotifyTRACEIcon = { fg = colors.dragonAqua },
+		NotifyERRORTitle = { fg = colors.samuraiRed, bold = true },
+		NotifyWARNTitle = { fg = colors.roninYellow, bold = true },
+		NotifyINFOTitle = { fg = colors.autumnGreen, bold = true },
+		NotifyDEBUGTitle = { fg = colors.dragonGray, bold = true },
+		NotifyTRACETitle = { fg = colors.dragonAqua, bold = true },
 	}
 end
 
