@@ -1,31 +1,47 @@
+-- lua/mytheme/init.lua
 local M = {}
 
-function M.setup()
-	print("Starting mytheme setup...")
-	-- Clear existing highlights
+function M.load()
+	print("Loading theme...")
+
+	-- Clear highlights
 	vim.cmd("highlight clear")
 	if vim.fn.exists("syntax_on") then
 		vim.cmd("syntax reset")
 	end
 
-	-- Set colorscheme name
+	vim.o.termguicolors = true
 	vim.g.colors_name = "mytheme"
 
-	-- Get colors
-	print("Loading colors...")
-	local colors = require("mytheme.colors")
+	-- Define some basic colors
+	local colors = {
+		bg = "#1F1F28",
+		fg = "#DCD7BA",
+	}
 
-	-- Load editor highlights
-	print("Loading editor highlights...")
-	local editor_highlights = require("mytheme.groups.editor").get(colors.groups)
+	-- Set basic highlights directly first
+	local highlights = {
+		Normal = { fg = colors.fg, bg = colors.bg },
+		NormalFloat = { fg = colors.fg, bg = colors.bg },
+		SignColumn = { bg = colors.bg },
+	}
 
-	-- Apply highlights
-	print("Applying highlights...")
-	for group, settings in pairs(editor_highlights) do
-		print(string.format("Setting highlight for %s", group))
+	-- Apply the highlights
+	for group, settings in pairs(highlights) do
+		print(string.format("Setting %s with fg=%s bg=%s", group, settings.fg or "none", settings.bg or "none"))
 		vim.api.nvim_set_hl(0, group, settings)
 	end
-	print("Mytheme setup complete!")
+
+	print("Basic highlights set")
+
+	-- Verify highlights were set
+	local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+	print("Normal highlight settings:", vim.inspect(normal_hl))
+end
+
+-- Keep the setup function for compatibility
+function M.setup()
+	M.load()
 end
 
 return M
