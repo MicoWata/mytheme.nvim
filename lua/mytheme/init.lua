@@ -81,6 +81,38 @@ function M.load()
 		SpecialComment = { fg = colors.springViolet1, italic = true },
 		Debug = { fg = colors.peachRed },
 
+		-- Java specific
+		["@keyword.java"] = { fg = colors.oniViolet },
+		["@type.java"] = { fg = colors.waveAqua1 },
+		["@property.java"] = { fg = colors.carpYellow },
+		["@variable.java"] = { fg = colors.fujiWhite },
+		["@parameter.java"] = { fg = colors.boatYellow2 },
+		["@function.java"] = { fg = colors.crystalBlue },
+		["@method.java"] = { fg = colors.crystalBlue },
+		["@keyword.function.java"] = { fg = colors.oniViolet },
+		["@constant.java"] = { fg = colors.surimiOrange },
+		["@constructor.java"] = { fg = colors.surimiOrange },
+		["@conditional.java"] = { fg = colors.oniViolet },
+		["@exception.java"] = { fg = colors.oniViolet },
+		["@include.java"] = { fg = colors.oniViolet },
+		["@repeat.java"] = { fg = colors.oniViolet },
+		["@storageclass.java"] = { fg = colors.oniViolet },
+		["@type.qualifier.java"] = { fg = colors.oniViolet },
+
+		-- LSP Semantic tokens
+		["@lsp.type.class.java"] = { fg = colors.waveAqua1 },
+		["@lsp.type.enum.java"] = { fg = colors.waveAqua1 },
+		["@lsp.type.interface.java"] = { fg = colors.waveAqua1 },
+		["@lsp.type.keyword.java"] = { fg = colors.oniViolet },
+		["@lsp.type.modifier.java"] = { fg = colors.oniViolet },
+		["@lsp.type.variable.java"] = { fg = colors.fujiWhite },
+		["@lsp.type.parameter.java"] = { fg = colors.boatYellow2 },
+		["@lsp.type.function.java"] = { fg = colors.crystalBlue },
+		["@lsp.type.method.java"] = { fg = colors.crystalBlue },
+		["@lsp.typeParameter.java"] = { fg = colors.waveAqua1 },
+		["@lsp.mod.readonly.java"] = { fg = colors.surimiOrange },
+		["@lsp.mod.static.java"] = { fg = colors.oniViolet },
+
 		-- Tree-sitter specific
 		["@variable"] = { fg = colors.fujiWhite },
 		["@parameter"] = { fg = colors.boatYellow2 },
