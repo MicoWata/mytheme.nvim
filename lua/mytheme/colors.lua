@@ -22,8 +22,8 @@ function M.load()
 		oldWhite = "#C8C093", -- darker foreground
 
 		-- Syntax Colors
-		springViolet1 = "#938AA9", -- comments
-		crystalBlue = "#7E9CD8", -- functions, keywords
+		springViolet1 = "#8992a7", -- comments
+		crystalBlue = "#658594", -- functions, keywords
 		springGreen = "#87a987", -- strings
 		sakuraPink = "#D27E99", -- special characters
 		surimiOrange = "#FFA066", -- constants
@@ -47,6 +47,7 @@ function M.load()
 		dragonGray = "#a6a69c",
 		dragonGray2 = "#9e9b93",
 		dragonGray3 = "#7a8382",
+		dragonBlue = "#658594",
 		dragonBlue2 = "#8ba4b0",
 		dragonViolet = "#8992a7",
 		dragonRed = "#c4746e",
