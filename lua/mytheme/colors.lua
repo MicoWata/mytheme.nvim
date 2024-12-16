@@ -24,11 +24,37 @@ function M.load()
 		-- Syntax Colors
 		springViolet1 = "#938AA9", -- comments
 		crystalBlue = "#7E9CD8", -- functions, keywords
-		springGreen = "#98BB6C", -- strings
+		springGreen = "#87a987", -- strings
 		sakuraPink = "#D27E99", -- special characters
 		surimiOrange = "#FFA066", -- constants
 		carpYellow = "#E6C384", -- operators
 		waveAqua1 = "#6A9589", -- types
+
+		dragonBlack0 = "#0d0c0c",
+		dragonBlack1 = "#12120f",
+		dragonBlack2 = "#1D1C19",
+		dragonBlack3 = "#181616",
+		dragonBlack4 = "#282727",
+		dragonBlack5 = "#393836",
+		dragonBlack6 = "#625e5a",
+
+		dragonWhite = "#c5c9c5",
+		dragonGreen = "#87a987",
+		dragonGreen2 = "#8a9a7b",
+		dragonPink = "#a292a3",
+		dragonOrange = "#b6927b",
+		dragonOrange2 = "#b98d7b",
+		dragonGray = "#a6a69c",
+		dragonGray2 = "#9e9b93",
+		dragonGray3 = "#7a8382",
+		dragonBlue2 = "#8ba4b0",
+		dragonViolet = "#8992a7",
+		dragonRed = "#c4746e",
+		dragonAqua = "#8ea4a2",
+		dragonAsh = "#737c73",
+		dragonTeal = "#949fb5",
+		dragonYellow = "#c4b28a", --"#a99c8b",
+		-- "#8a9aa3",
 	}
 
 	-- Define highlight groups using exact colors
