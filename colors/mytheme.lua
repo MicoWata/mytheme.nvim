@@ -1,4 +1,5 @@
 -- colors/mytheme.lua
+print("Loading mytheme colorscheme...")
 if vim == nil then
 	return
 end
@@ -10,5 +11,6 @@ end
 
 vim.o.termguicolors = true
 vim.g.colors_name = "mytheme"
-
+print("About to require mytheme setup...")
 require("mytheme").setup()
+print("Mytheme setup complete!")
